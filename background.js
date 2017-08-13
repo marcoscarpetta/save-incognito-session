@@ -3,7 +3,7 @@
  * @licstart  The following is the entire license notice for the 
  *  JavaScript code in this page.
  *
- * Copyright (C) 2016  Marco Scarpetta
+ * Copyright (C) 2017  Marco Scarpetta
  *
  *
  * The JavaScript code in this page is free software: you can
