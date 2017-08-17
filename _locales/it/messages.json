@@ -1,0 +1,11 @@
+{
+    "extension_name": {"message": "Salva la sessione anonima"},
+    "extension_description": {"message": "Questo addon ti permette di creare una finestra anonima i cui cookie sono salvati per la sessione seguente."},
+    "browser_action_title": {"message": "Nuova finestra anonima"},
+    "add_page": {"message": "Aggiungi pagina"},
+    "remove": {"message": "Rimuovi"},
+    "clear_all_cookies": {"message": "Cancella tutti i cookie"},
+    "initial_pages_title": {"message": "Pagine iniziali"},
+    "initial_pages_description": {"message": "Imposta le pagine da aprire nella finestra anonima."},
+    "url_entry_placeholder": {"message": "URL della pagina"}
+} 

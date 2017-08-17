@@ -1,0 +1,11 @@
+{
+    "extension_name": {"message": "Save incognito session"},
+    "extension_description": {"message": "This addon let you create an incognito window which cookies get saved for the following session."},
+    "browser_action_title": {"message": "New incognito window"},
+    "add_page": {"message": "Add page"},
+    "remove": {"message": "Remove"},
+    "clear_all_cookies": {"message": "Clear all cookies"},
+    "initial_pages_title": {"message": "Initial pages"},
+    "initial_pages_description": {"message": "Set pages to be opened in the incognito window."},
+    "url_entry_placeholder": {"message": "Page URL"}
+} 

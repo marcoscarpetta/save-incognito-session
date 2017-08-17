@@ -1,9 +1,13 @@
 {
     "manifest_version": 2,
-    "name": "Save incognito session",
-    "version": "0.1",
-    "description": "Create incognito windows and save their cookies on exit",
-
+    "name": "__MSG_extension_name__",
+    "version": "0.2",
+    "description": "__MSG_extension_description__",
+    "author": "Marco Scarpetta",
+    "homepage_url": "https://github.com/marcoscarpetta/save-incognito-session",
+    
+    "default_locale": "en",
+    
     "icons": {
         "96": "icons/icon.svg"
     },
@@ -16,7 +20,7 @@
         "default_icon": {
             "96": "icons/icon.svg"
         },
-        "default_title": "New incognito window"
+        "default_title": "__MSG_browser_action_title__"
     },
     
     "options_ui": {

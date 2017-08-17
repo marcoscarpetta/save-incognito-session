@@ -32,37 +32,40 @@ function remove_page(event)
     browser.storage.sync.get("initial_pages").then((data) => {
         var list = data["initial_pages"];
         list.splice(parseInt(event.target.dataset["index"]), 1);
-        browser.storage.sync.set({"initial_pages": list}).then((data) => {list_pages()});
+        browser.storage.sync.set({"initial_pages": list}).then((data) => {list_pages(list)});
     });
 }
 
-list_pages = function()
+list_pages = function(pages)
 {
-    var table = document.querySelector("#initial_pages");
-    browser.storage.sync.get("initial_pages").then((data) => {
+    
+    if (pages)
+    {
+        var table = document.querySelector("#initial_pages");
+        
         //remove old entries from options UI
         table.innerHTML = "";
+        
         //add new entries
-        if (data["initial_pages"])
-            for (var i=0; i<data["initial_pages"].length; i++)
-            {
-                var tr = document.createElement("tr");
-                var page = document.createElement("td");
-                var remove_button_cell = document.createElement("td");
-                var remove_button = document.createElement("button");
-                
-                page.appendChild(document.createTextNode(data["initial_pages"][i]));
-                page.style.paddingRight = "4rem";
-                remove_button.appendChild(document.createTextNode("Remove"));
-                remove_button.dataset["index"] = i;
-                remove_button.addEventListener("click", remove_page);
-                
-                remove_button_cell.appendChild(remove_button);
-                tr.appendChild(page);
-                tr.appendChild(remove_button_cell);
-                table.appendChild(tr);
-            }
-    });
+        for (var i=0; i<pages.length; i++)
+        {
+            var tr = document.createElement("tr");
+            var page = document.createElement("td");
+            var remove_button_cell = document.createElement("td");
+            var remove_button = document.createElement("button");
+            
+            page.appendChild(document.createTextNode(pages[i]));
+            page.style.paddingRight = "4rem";
+            remove_button.appendChild(document.createTextNode(browser.i18n.getMessage("remove")));
+            remove_button.dataset["index"] = i;
+            remove_button.addEventListener("click", remove_page);
+            
+            remove_button_cell.appendChild(remove_button);
+            tr.appendChild(page);
+            tr.appendChild(remove_button_cell);
+            table.appendChild(tr);
+        }
+    }
 }
 
 function add_page()
@@ -73,10 +76,10 @@ function add_page()
         if (list)
         {
             list.push(url_entry.value);
-            browser.storage.sync.set({"initial_pages": list}).then((data) => {list_pages()});
+            browser.storage.sync.set({"initial_pages": list}).then((data) => {list_pages(list)});
         }
         else
-            browser.storage.sync.set({"initial_pages": [url_entry.value]}).then((data) => {list_pages()});
+            browser.storage.sync.set({"initial_pages": [url_entry.value]}).then((data) => {list_pages([url_entry.value])});
         url_entry.value = "";
     });
 }
@@ -86,6 +89,20 @@ function clear_all_cookies()
     browser.storage.local.clear();
 }
 
-window.addEventListener("load", list_pages);
-document.querySelector("#add_page_button").addEventListener("click", add_page);
-document.querySelector("#clear_all").addEventListener("click", clear_all_cookies);
+window.addEventListener("load", function() {
+    browser.storage.sync.get("initial_pages").then((data) => {
+        list_pages(data["initial_pages"]);
+    });
+    
+    var add_page_button = document.querySelector("#add_page_button");
+    add_page_button.appendChild(document.createTextNode(browser.i18n.getMessage("add_page")));
+    add_page_button.addEventListener("click", add_page);
+    
+    var clear_all_cookies_button = document.querySelector("#clear_all");
+    clear_all_cookies_button.appendChild(document.createTextNode(browser.i18n.getMessage("clear_all_cookies")));
+    clear_all_cookies_button.addEventListener("click", clear_all_cookies);
+    
+    document.querySelector("#initial_pages_title").appendChild(document.createTextNode(browser.i18n.getMessage("initial_pages_title")));
+    document.querySelector("#initial_pages_description").appendChild(document.createTextNode(browser.i18n.getMessage("initial_pages_description")));
+    document.querySelector("#url_entry").placeholder = browser.i18n.getMessage("url_entry_placeholder");
+});
