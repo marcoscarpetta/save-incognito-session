@@ -44,7 +44,7 @@ list_pages = function(pages)
         var table = document.querySelector("#initial_pages");
         
         //remove old entries from options UI
-        table.innerHTML = "";
+        table.textContent = "";
         
         //add new entries
         for (var i=0; i<pages.length; i++)
